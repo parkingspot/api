@@ -10,7 +10,7 @@ const mongoose = require('mongoose');
 const cookieParser = require('cookie-parser');
 
 require('./configs/db.config');
-// require('./configs/passport.config').setup(passport);
+require('./configs/passport.config').setup(passport);
 
 
 const usersRoutes = require('./routes/users.routes');
@@ -32,7 +32,7 @@ app.use(cookieParser());
 
 app.use(express.static(path.join(__dirname, 'public')));
 
-/* CONFIGURACIÓN PASSPORT
+
 app.use(session({
   secret: process.env.COOKIE_SECRET || 'Super Secret',
   resave: true,
@@ -50,7 +50,6 @@ app.use((req, res, next) => {
   res.locals.session = req.user || {};
 next();
 });
-*/
 
 
 // ROUTES:

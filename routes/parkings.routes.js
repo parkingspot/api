@@ -4,12 +4,12 @@ const router = express.Router();
 
 const parkingsController = require('../controllers/parkings.controller');
 // const phonesMiddleware = require('../middleware/phones.middleware');
-// const secureMiddleware = require('../middleware/secure.middleware');
+const secureMiddleware = require('../middleware/secure.middleware');
 
-router.get('/', parkingsController.list);
-router.post('/', parkingsController.create);
-router.get('/:id', parkingsController.get);
-router.put('/:id', parkingsController.edit);
-router.delete('/:id', parkingsController.delete);
+router.get('/', secureMiddleware.isAuthenticated, parkingsController.list);
+router.post('/', secureMiddleware.isAuthenticated, parkingsController.create);
+router.get('/:id', secureMiddleware.isAuthenticated, parkingsController.get);
+router.put('/:id', secureMiddleware.isAuthenticated, parkingsController.edit);
+router.delete('/:id', secureMiddleware.isAuthenticated, parkingsController.delete);
 
 module.exports = router;
