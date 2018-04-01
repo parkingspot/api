@@ -6,7 +6,7 @@ const cors = require('cors');
 const session = require('express-session');
 const passport = require('passport');
 const mongoose = require('mongoose');
-// const corsConfig = require('./configs/cors.config'); // OJO
+const corsConfig = require('./configs/cors.config');
 const cookieParser = require('cookie-parser');
 
 require('./configs/db.config');
@@ -20,7 +20,7 @@ const sessionRoutes = require('./routes/session.routes');
 const app = express();
 
 
-// app.use(cors(corsConfig)) // Ojo
+app.use(cors(corsConfig));
 
 app.use(logger('dev'));
 
