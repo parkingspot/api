@@ -20,7 +20,8 @@ const sessionRoutes = require('./routes/session.routes');
 const app = express();
 
 
-app.use(cors(corsConfig)) // Ojo
+t
+app.use(cors(corsConfig))
 
 app.use(logger('dev'));
 

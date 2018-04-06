@@ -5,11 +5,12 @@ const router = express.Router();
 const parkingsController = require('../controllers/parkings.controller');
 // const phonesMiddleware = require('../middleware/phones.middleware');
 const secureMiddleware = require('../middleware/secure.middleware');
+const roleMiddleware = require('../middleware/role.middleware');
 
-router.get('/', secureMiddleware.isAuthenticated, parkingsController.list);
-router.post('/', secureMiddleware.isAuthenticated, parkingsController.create);
+router.get('/', /*secureMiddleware.isAuthenticated,*/  parkingsController.list);
+router.post('/', secureMiddleware.isAuthenticated, roleMiddleware.isAdmin, parkingsController.create);
 router.get('/:id', secureMiddleware.isAuthenticated, parkingsController.get);
-router.put('/:id', secureMiddleware.isAuthenticated, parkingsController.edit);
-router.delete('/:id', secureMiddleware.isAuthenticated, parkingsController.delete);
+router.put('/:id', secureMiddleware.isAuthenticated, roleMiddleware.isAdmin, parkingsController.edit);
+router.delete('/:id', secureMiddleware.isAuthenticated, roleMiddleware.isAdmin, parkingsController.delete);
 
 module.exports = router;
