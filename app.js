@@ -20,7 +20,8 @@ const sessionRoutes = require('./routes/session.routes');
 const app = express();
 
 
-app.use(cors(corsConfig));
+t
+app.use(cors(corsConfig))
 
 app.use(logger('dev'));
 
@@ -75,7 +76,7 @@ app.use(function(err, req, res, next) {
 
   // render the error page
   res.status(err.status || 500);
-  res.render('error');
+  res.json({ error:'error' });
 });
 
 module.exports = app;

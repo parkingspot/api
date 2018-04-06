@@ -12,9 +12,10 @@ module.exports.create = (req, res, next) => {
       if (user) {
         next(new ApiError('User already registered', 400));
       } else {
-        user = new User(req.body);
+        console.log('no existe luego lo creo')
+        const user = new User(req.body);
         user.save()
-          .then(() => {
+          .then((user) => {
             res.json(user);
           })
           .catch(error => {
