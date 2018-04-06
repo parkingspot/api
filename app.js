@@ -6,7 +6,7 @@ const cors = require('cors');
 const session = require('express-session');
 const passport = require('passport');
 const mongoose = require('mongoose');
-// const corsConfig = require('./configs/cors.config'); // OJO
+const corsConfig = require('./configs/cors.config');
 const cookieParser = require('cookie-parser');
 
 require('./configs/db.config');
@@ -20,7 +20,7 @@ const sessionRoutes = require('./routes/session.routes');
 const app = express();
 
 
-// app.use(cors(corsConfig)) // Ojo
+app.use(cors(corsConfig)) // Ojo
 
 app.use(logger('dev'));
 
@@ -75,7 +75,7 @@ app.use(function(err, req, res, next) {
 
   // render the error page
   res.status(err.status || 500);
-  res.render('error');
+  res.json({ error:'error' });
 });
 
 module.exports = app;
