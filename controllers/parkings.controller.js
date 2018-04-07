@@ -23,7 +23,19 @@ module.exports.get = (req, res, next) => {
 };
 
 module.exports.create = (req, res, next) => {
-  const parking = new Parking(req.body);
+  console.log(req.body);
+
+
+  const parking = new Parking({
+      name: req.body.name,
+      address: req.body.address,
+      totalParkingSpots: req.body.totalParkingSpots,
+      availableParkingSpots: req.body.availableParkingSpots,
+      schedule: req.body.schedule,
+      location: {
+        coordinates: req.body.location
+      }
+    });
   parking.save()
     .then(() => {
       res.status(201).json(parking);

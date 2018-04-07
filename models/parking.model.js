@@ -8,47 +8,39 @@ const parkingSchema = new mongoose.Schema({
     type: String,
     required: [true, 'address is required']
   },
-  locality: {
-    type: String,
-    required: [true, 'locality is required']
-  },
-  postalCode: {
-    type: String,
-    default: ''
-  },
   totalParkingSpots: {
     type: Number,
     required: [true, 'total parking spots is required']
   },
   availableParkingSpots: {
     type: Number,
-    required: [true, 'available parking spots is required']
+    // required: [true, 'available parking spots is required']
   },
   schedule: {
     type: String,
     default: '24 h'
   },
-  longitude: {
-    type: Number,
-    required: [true, 'longitude is required']
-  },
-  latitude: {
-    type: Number,
-    required: [true, 'latitude is required']
+  location: {
+    type: {
+      type: String,
+      default: 'Point'
+    },
+    coordinates: [Number]
   }
-}
-);
-/*, {
-  timestamps: true,
-  toJSON: {
-    transform: (doc, ret) => {
-      ret.id = doc._id;
-      delete ret._id;
-      delete ret.__v;
-      return ret;
+} , {
+    timestamps: true,
+    toJSON: {
+      transform: (doc, ret) => {
+        ret.id = doc._id;
+        ret.location = doc.location.coordinates;
+        delete ret._id;
+        delete ret.__v;
+        return ret;
+      }
     }
-  }
-}*/
+  });
+
+parkingSchema.index({ "location": "2dsphere" });
 
 const Parking = mongoose.model('Parking', parkingSchema);
 module.exports = Parking;
