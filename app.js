@@ -30,8 +30,6 @@ app.use(bodyParser.urlencoded({ extended: false }));
 
 app.use(cookieParser());
 
-app.use(express.static(path.join(__dirname, 'public')));
-
 
 app.use(session({
   secret: process.env.COOKIE_SECRET || 'Super Secret',
@@ -75,7 +73,7 @@ app.use(function(err, req, res, next) {
 
   // render the error page
   res.status(err.status || 500);
-  res.render('error');
+  res.json('error');
 });
 
 module.exports = app;
