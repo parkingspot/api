@@ -50,20 +50,25 @@ module.exports.create = (req, res, next) => {
 };
 
 module.exports.edit = (req, res, next) => {
+  console.log("Entra en edit")
+  console.log(req.body)
   const id = req.params.id;
-  Parking.findByIdAndUpdate(id, { $set: req.body }, { new: true })
-    .then(parking => {
-      if (parking) {
-        res.json(parking)
+  console.log(id)
+  Parking.findByIdAndUpdate(req.body.id, {$set: req.body}, {new: true})
+    .then(updatedParking => {
+      console.log(updatedParking)
+      if (updatedParking) {
+        res.json(updatedParking)
       } else {
         next(new ApiError(`Parking not found`, 404));
       }
     }).catch(error => {
-    if (error instanceof mongoose.Error.ValidationError) {
-      next(new ApiError(error.message, 400, error.errors));
-    } else {
-      next(new ApiError(error.message, 500));
-    }
+      console.log(error)
+    // if (error instanceof mongoose.Error.ValidationError) {
+    //   next(new ApiError(error.message, 400, error.errors));
+    // } else {
+    //   next(new ApiError(error.message, 500));
+    // }
   });
 };
 

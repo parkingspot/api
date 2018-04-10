@@ -2,15 +2,15 @@ const mongoose = require('mongoose');
 const parkingSchema = new mongoose.Schema({
   name: {
     type: String,
-    required: [true, 'name is required']
+    // required: [true, 'name is required']
   },
   address: {
     type: String,
-    required: [true, 'address is required']
+    // required: [true, 'address is required']
   },
   totalParkingSpots: {
     type: Number,
-    required: [true, 'total parking spots is required']
+    // required: [true, 'total parking spots is required']
   },
   availableParkingSpots: {
     type: Number,
