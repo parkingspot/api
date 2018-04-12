@@ -11,6 +11,6 @@ router.get('/', /*secureMiddleware.isAuthenticated,*/ parkingsController.list);
 router.post('/', /*secureMiddleware.isAuthenticated, roleMiddleware.isAdmin,*/ parkingsController.create);
 router.get('/:id', secureMiddleware.isAuthenticated, parkingsController.get);
 router.put('/:id', /*secureMiddleware.isAuthenticated, roleMiddleware.isAdmin,*/ parkingsController.edit);
-router.delete('/:id', secureMiddleware.isAuthenticated, roleMiddleware.isAdmin, parkingsController.delete);
+router.delete('/:id', /*secureMiddleware.isAuthenticated, roleMiddleware.isAdmin,*/ parkingsController.delete);
 
 module.exports = router;
