@@ -8,6 +8,14 @@ module.exports.list = (req, res, next) => {
     .catch(error => next(error));
 };
 
+module.exports.listByUser = (req, res, next) => {
+  Parking.find({ owner: req.user._id })
+    .then(parkings => res.json(parkings))
+    .catch(error => next(error));
+};
+
+
+
 module.exports.get = (req, res, next) => {
   const id = req.params.id;
   Parking.findById(id)
@@ -34,7 +42,8 @@ module.exports.create = (req, res, next) => {
       schedule: req.body.schedule,
       location: {
         coordinates: req.body.location
-      }
+      },
+      owner: req.user._id
     });
   parking.save()
     .then(() => {

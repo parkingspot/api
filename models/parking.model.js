@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+// const Schema = require('Schema');
 const parkingSchema = new mongoose.Schema({
   name: {
     type: String,
@@ -26,6 +27,9 @@ const parkingSchema = new mongoose.Schema({
       default: 'Point'
     },
     coordinates: [Number]
+  },
+  owner: {
+    type: mongoose.Schema.Types.ObjectId
   }
 } , {
     timestamps: true,
