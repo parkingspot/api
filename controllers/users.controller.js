@@ -27,3 +27,35 @@ module.exports.create = (req, res, next) => {
       }
     }).catch(error => next(new ApiError('User already registered', 500)));
 }
+
+module.exports.list = (req, res, next) => {
+  User.find()
+    .then(users => res.json(users))
+    .catch(error => next(error));
+};
+
+module.exports.edit = (req, res, next) => {
+  const id = req.params.id;
+  User.findByIdAndUpdate(id, {$set: req.body})
+    .then(updatedUser => {
+      if (updatedUser) {
+        res.json(updatedUser)
+      } else {
+        next(new ApiError(`User not found`, 404));
+      }
+    }).catch(error => {
+    console.log(error);
+  })
+};
+
+module.exports.delete = (req, res, next) => {
+  const id = req.params.id;
+  User.findByIdAndRemove(id)
+    .then(user => {
+      if (user) {
+        res.status(204).json()
+      } else {
+        next(new ApiError(`Parking not found`, 404));
+      }
+    }).catch(error => next(error));
+};

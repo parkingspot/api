@@ -8,13 +8,33 @@ module.exports.list = (req, res, next) => {
     .catch(error => next(error));
 };
 
+module.exports.near = (req, res, next) => {
+  const lng = req.params.lng;
+  const lat = req.params.lat;
+  console.log(lng, lat);
+  // const lng = req.params.pos['lng'];
+  // const lat = req.params.pos['lat'];
+
+  Parking.find(
+  {
+    location:
+    { $near :
+      {
+        $geometry: { type: "Point",  coordinates: [ lng, lat ] },
+          $minDistance: 10,
+          $maxDistance: 5000
+      }
+    }
+  }).then(parkings => res.json(parkings))
+    .catch(error => next(error));
+};
+
+
 module.exports.listByUser = (req, res, next) => {
   Parking.find({ owner: req.user._id })
     .then(parkings => res.json(parkings))
     .catch(error => next(error));
 };
-
-
 
 module.exports.get = (req, res, next) => {
   const id = req.params.id;
@@ -32,7 +52,6 @@ module.exports.get = (req, res, next) => {
 
 module.exports.create = (req, res, next) => {
   console.log(req.body);
-
 
   const parking = new Parking({
       name: req.body.name,
@@ -59,20 +78,16 @@ module.exports.create = (req, res, next) => {
 };
 
 module.exports.edit = (req, res, next) => {
-  console.log("Entra en edit")
-  console.log(req.body)
   const id = req.params.id;
-  console.log(id)
   Parking.findByIdAndUpdate(req.body.id, {$set: req.body}, {new: true})
     .then(updatedParking => {
-      console.log(updatedParking)
       if (updatedParking) {
         res.json(updatedParking)
       } else {
         next(new ApiError(`Parking not found`, 404));
       }
     }).catch(error => {
-      console.log(error)
+      console.log(error);
     // if (error instanceof mongoose.Error.ValidationError) {
     //   next(new ApiError(error.message, 400, error.errors));
     // } else {

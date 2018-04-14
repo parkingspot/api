@@ -8,6 +8,7 @@ const secureMiddleware = require('../middleware/secure.middleware');
 const roleMiddleware = require('../middleware/role.middleware');
 
 router.get('/', parkingsController.list);
+router.get('/near/:lng/:lat', parkingsController.near);
 router.get('/user', /*secureMiddleware.isAuthenticated,*/ parkingsController.listByUser);
 router.post('/', secureMiddleware.isAuthenticated, /*roleMiddleware.isAdmin,*/ parkingsController.create);
 router.get('/:id', secureMiddleware.isAuthenticated, parkingsController.get);

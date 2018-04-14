@@ -49,14 +49,10 @@ app.use((req, res, next) => {
 next();
 });
 
-
 // ROUTES:
-
 app.use('/users', usersRoutes);
 app.use('/parkings', parkingsRoutes);
 app.use('/session', sessionRoutes);
-
-
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
