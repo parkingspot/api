@@ -4,11 +4,8 @@ const ApiError = require('../models/api-error.model');
 
 module.exports.create = (req, res, next) => {
   console.log('Inicio Controlador Create');
-  // console.log(req.body);
   User.findOne({ email: req.body.email })
     .then(user => {
-      console.log('Entra en THEN');
-      console.log(req.body);
       if (user) {
         next(new ApiError('User already registered', 400));
       } else {
@@ -38,6 +35,7 @@ module.exports.edit = (req, res, next) => {
   const id = req.params.id;
   User.findByIdAndUpdate(id, {$set: req.body})
     .then(updatedUser => {
+      console.log(req.body)
       if (updatedUser) {
         res.json(updatedUser)
       } else {

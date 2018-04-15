@@ -4,6 +4,10 @@ const Schema   = mongoose.Schema;
 const SALT_WORK_FACTOR = 10;
 
 const userSchema = new mongoose.Schema({
+    name: {
+      type: String,
+      required: [true, 'User needs a name'],
+  },
     email: {
       type: String,
       lowercase: true,
@@ -15,10 +19,14 @@ const userSchema = new mongoose.Schema({
       type: String,
       required: [true, 'User needs a password']
     },
+    city: {
+      type: String,
+      required: [true, 'User needs a city'],
+    },
     role: {
       type: String,
       required: [true, 'User needs a role'],
-      default: 'regular'
+      default: 'user'
     }
   },
   {
