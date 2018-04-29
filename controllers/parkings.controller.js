@@ -59,6 +59,7 @@ module.exports.create = (req, res, next) => {
       totalParkingSpots: req.body.totalParkingSpots,
       availableParkingSpots: req.body.availableParkingSpots,
       schedule: req.body.schedule,
+      price: req.body.price,
       location: {
         coordinates: req.body.location
       },

@@ -1,5 +1,4 @@
 const mongoose = require('mongoose');
-// const Schema = require('Schema');
 const parkingSchema = new mongoose.Schema({
   name: {
     type: String,
@@ -11,11 +10,11 @@ const parkingSchema = new mongoose.Schema({
   },
   totalParkingSpots: {
     type: Number,
-    // required: [true, 'total parking spots is required']
+    default: 0
   },
   availableParkingSpots: {
     type: Number,
-    // required: [true, 'available parking spots is required']
+    default: 0
   },
   schedule: {
     type: String,
@@ -27,6 +26,11 @@ const parkingSchema = new mongoose.Schema({
       default: 'Point'
     },
     coordinates: [Number]
+    // required:
+  },
+  price: {
+      type: String,
+      default: '0'
   },
   owner: {
     type: mongoose.Schema.Types.ObjectId
