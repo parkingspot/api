@@ -22,7 +22,7 @@ module.exports.near = (req, res, next) => {
       {
         $geometry: { type: "Point",  coordinates: [ lng, lat ] },
           $minDistance: 10,
-          $maxDistance: 8000
+          $maxDistance: 4000
       }
     }
   }).then(parkings => res.json(parkings))
